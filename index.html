@@ -181,6 +181,48 @@
             animation: fadeInUp 1s ease-out;
         }
 
+        /* Social Buttons Container */
+        .social-buttons-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 200, 100, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            backdrop-filter: blur(10px);
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 200, 100, 0.2);
+            border-color: rgba(255, 200, 100, 0.6);
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 200, 100, 0.4);
+        }
+
+        .social-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: rgba(255, 200, 100, 0.9);
+            transition: fill 0.3s ease;
+        }
+
+        .social-btn:hover svg {
+            fill: rgba(255, 255, 255, 1);
+        }
+
         /* Estilo aprimorado para a imagem hero */
         .hero-image-container {
             position: relative;
@@ -314,12 +356,91 @@
             color: rgba(255, 255, 255, 0.9);
             font-weight: 700;
             font-size: 0.8rem;
+            transition: transform 0.3s ease;
         }
 
         .counter-text {
             color: rgba(255, 200, 100, 0.7);
             font-size: 0.65rem;
             letter-spacing: 0.05em;
+        }
+
+        /* Footer Advertência */
+        .footer-warning {
+            background: linear-gradient(135deg, rgba(10, 10, 21, 0.98) 0%, rgba(26, 10, 46, 0.98) 50%, rgba(15, 10, 26, 0.98) 100%);
+            border-top: 2px solid rgba(220, 20, 60, 0.4);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer-warning::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.8), rgba(147, 51, 234, 0.8), rgba(220, 20, 60, 0.8), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .warning-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+            animation: pulse-warning 2s infinite;
+        }
+
+        @keyframes pulse-warning {
+            0%, 100% { 
+                text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 25px rgba(220, 20, 60, 0.8), 0 0 40px rgba(147, 51, 234, 0.5);
+                transform: scale(1.1);
+            }
+        }
+
+        .warning-text {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1rem, 3vw, 1.4rem);
+            color: rgba(255, 200, 100, 0.95);
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.8;
+            font-style: italic;
+            text-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+        }
+
+        .warning-signature {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(220, 20, 60, 0.8);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .footer-divider {
+            width: 150px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(220, 20, 60, 0.6), transparent);
+            margin: 1.5rem auto;
+        }
+
+        .footer-credits {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.4);
+            margin-top: 1rem;
         }
 
         /* Tables Layout */
@@ -528,6 +649,16 @@
             .card-attribute {
                 font-size: 0.8rem;
                 line-height: 1.2;
+            }
+
+            .social-btn {
+                width: 40px;
+                height: 40px;
+            }
+
+            .social-btn svg {
+                width: 20px;
+                height: 20px;
             }
         }
 
@@ -805,6 +936,16 @@
                     0 0 15px rgba(30, 144, 255, 0.5);
             }
         }
+
+        @media (max-width: 768px) {
+            .detail-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .detail-image {
+                position: relative;
+            }
+        }
     </style>
 </head>
 <body>
@@ -828,6 +969,25 @@
     <div class="container">
         <section class="hero-section">
             <div class="hero-content">
+                <!-- Social Buttons -->
+                <div class="social-buttons-container">
+                    <!-- Botão Esquerdo - Redes Sociais -->
+                    <a href="https://alexialuzdeferro.github.io/melusine_redes/" target="_blank" class="social-btn" title="Redes Sociais">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <line x1="12" y1="18" x2="12" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </a>
+                    
+                    <!-- Botão Direito - Bio/Site -->
+                    <a href="https://bio.site/AlmasdePombagira" target="_blank" class="social-btn" title="Site">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </a>
+                </div>
+
                 <div class="hero-image-container">
                     <img src="https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/hero_pombagira.png" alt="Hero Pombagira">
                 </div>
@@ -861,6 +1021,19 @@
         </section>
 
         <div id="detailSection"></div>
+
+        <!-- Footer com Advertência -->
+        <footer class="footer-warning">
+            <span class="warning-icon">🌹⚔️🌹</span>
+            <p class="warning-text">
+                "Não brinque com o que não conhece, criatura. Nós vemos além dos véus, sentimos cada intenção que pulsa no seu coração. 
+                Quem nos procura por vaidade, colhe espinhos. Quem vem com respeito, encontra a rosa. 
+                A encruzilhada não perdoa os tolos — ela apenas os devolve ao próprio abismo."
+            </p>
+            <div class="footer-divider"></div>
+            <p class="warning-signature">— As Pombagiras</p>
+            <p class="footer-credits">Mistério das Giras © 2024 — Com respeito às tradições ancestrais</p>
+        </footer>
     </div>
 
     <script>
@@ -1181,7 +1354,6 @@
                 "simbolismo": ["Sombra", "Véu", "Portal oculto", "Morcego"],
                 "utensílios": ["Véu negro", "Chave antiga", "Cajado escuro"]
             },
-            // NOVAS POMBAGIRAS RARÍSSIMAS - COM DESTAQUE ESPECIAL
             {
                 "id": "calunga-profunda",
                 "name": "Pombagira da Calunga Profunda",
@@ -1252,45 +1424,43 @@
             }
         ];
 
-        // Função para registrar visitas no Supabase
+        // Sistema de contador com fallback local
+        let localVisitCount = parseInt(localStorage.getItem('local_visit_count') || '0');
+
+        // Função para registrar visitas no Supabase com fallback
         async function trackVisit() {
+            const counterElement = document.getElementById('visitCount');
+            
             try {
-                // Criar um ID único para esta sessão
-                const sessionId = localStorage.getItem('session_id') || 
-                    'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                // Verificar se já visitou nesta sessão
+                const hasVisited = sessionStorage.getItem('has_visited');
                 
-                if (!localStorage.getItem('session_id')) {
-                    localStorage.setItem('session_id', sessionId);
+                if (!hasVisited) {
+                    // Incrementar contador local
+                    localVisitCount++;
+                    localStorage.setItem('local_visit_count', localVisitCount.toString());
+                    sessionStorage.setItem('has_visited', 'true');
                     
-                    // Registrar visita no Supabase
-                    const response = await fetch(`${SUPABASE_URL}/rest/v1/visits`, {
+                    // Tentar registrar no Supabase
+                    const sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                    
+                    await fetch(`${SUPABASE_URL}/rest/v1/visits`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'apikey': SUPABASE_KEY,
-                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                            'Authorization': `Bearer ${SUPABASE_KEY}`,
+                            'Prefer': 'return=minimal'
                         },
                         body: JSON.stringify({
                             session_id: sessionId,
                             visited_at: new Date().toISOString(),
-                            user_agent: navigator.userAgent
+                            user_agent: navigator.userAgent.substring(0, 200)
                         })
                     });
-                    
-                    if (response.ok) {
-                        updateVisitCount();
-                    }
-                } else {
-                    updateVisitCount();
                 }
-            } catch (error) {
-                console.log('Erro ao registrar visita:', error);
-            }
-        }
-
-        // Função para obter e atualizar contador de visitas
-        async function updateVisitCount() {
-            try {
+                
+                // Obter contagem do Supabase
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/visits?select=id`, {
                     headers: {
                         'apikey': SUPABASE_KEY,
@@ -1302,24 +1472,54 @@
                     const visits = await response.json();
                     const count = visits.length;
                     
-                    // Formatar número com separador de milhar
-                    const formattedCount = count.toLocaleString('pt-BR');
-                    
-                    // Atualizar display
-                    const counterElement = document.getElementById('visitCount');
-                    if (counterElement) {
-                        counterElement.textContent = formattedCount;
-                        
-                        // Animação sutil
-                        counterElement.style.transform = 'scale(1.2)';
-                        setTimeout(() => {
-                            counterElement.style.transform = 'scale(1)';
-                        }, 300);
-                    }
+                    // Usar o maior valor entre Supabase e local
+                    const displayCount = Math.max(count, localVisitCount);
+                    updateCounterDisplay(displayCount);
+                } else {
+                    // Fallback para contador local
+                    updateCounterDisplay(localVisitCount);
                 }
             } catch (error) {
-                console.log('Erro ao obter contagem:', error);
+                console.log('Usando contador local:', error);
+                // Fallback para contador local
+                updateCounterDisplay(localVisitCount);
             }
+        }
+
+        function updateCounterDisplay(count) {
+            const counterElement = document.getElementById('visitCount');
+            if (counterElement) {
+                const formattedCount = count.toLocaleString('pt-BR');
+                counterElement.textContent = formattedCount;
+                
+                // Animação sutil
+                counterElement.style.transform = 'scale(1.2)';
+                setTimeout(() => {
+                    counterElement.style.transform = 'scale(1)';
+                }, 300);
+            }
+        }
+
+        // Atualizar contador periodicamente
+        function startCounterRefresh() {
+            setInterval(async () => {
+                try {
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/visits?select=id`, {
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        const visits = await response.json();
+                        const count = Math.max(visits.length, localVisitCount);
+                        updateCounterDisplay(count);
+                    }
+                } catch (error) {
+                    // Silencioso em caso de erro
+                }
+            }, 30000); // Atualiza a cada 30 segundos
         }
 
         function createStars() {
@@ -1347,10 +1547,8 @@
             const front = document.createElement('div');
             front.className = 'card-front';
             
-            // Usamos attributeFormatted se existir, senão usamos o attribute normal
             const attributeText = pombagira.attributeFormatted || pombagira.attribute;
             
-            // Determinar qual badge usar: RARÍSSIMA para as 4 especiais, RARA para as outras
             const badgeClass = pombagira.ultraRare ? 'ultra-rare-badge' : 'rare-badge';
             const badgeText = pombagira.ultraRare ? 'RARÍSSIMA' : 'RARA';
             
@@ -1512,7 +1710,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
             renderCards();
-            trackVisit(); // Iniciar rastreamento de visitas
+            trackVisit();
+            startCounterRefresh();
         });
     </script>
 </body>
