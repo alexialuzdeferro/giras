@@ -240,11 +240,25 @@
             }
         }
 
-        /* Cards Section */
-        .cards-section {
+        /* Tables Layout */
+        .tables-section {
             padding: 4rem 2rem;
-            max-width: 1400px;
+            max-width: 1600px;
             margin: 0 auto;
+        }
+
+        .tables-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 1200px) {
+            .tables-container {
+                grid-template-columns: 1fr;
+                gap: 6rem;
+            }
         }
 
         .section-header {
@@ -399,6 +413,7 @@
         .card-text-section {
             text-align: center;
             margin-top: 1rem;
+            width: 100%;
         }
 
         .card-name {
@@ -409,6 +424,7 @@
             letter-spacing: 0.05em;
             margin: 0;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
         }
 
         .card-attribute {
@@ -419,6 +435,19 @@
             margin: 0.5rem 0 0 0;
             text-transform: uppercase;
             font-weight: 600;
+            line-height: 1.3;
+        }
+
+        /* Para telas pequenas, ajustamos o tamanho do texto */
+        @media (max-width: 480px) {
+            .card-name {
+                font-size: 1.5rem;
+            }
+            
+            .card-attribute {
+                font-size: 0.8rem;
+                line-height: 1.2;
+            }
         }
 
         /* Back Card */
@@ -639,6 +668,22 @@
             left: 0;
             color: rgba(255, 200, 100, 0.6);
         }
+
+        /* Rare Badge */
+        .rare-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.9) 0%, rgba(102, 0, 204, 0.9) 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+        }
     </style>
 </head>
 <body>
@@ -656,32 +701,44 @@
             <div class="hero-content">
                 <img src="https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/hero_pombagira.png" alt="Hero Pombagira" style="max-width: 100%; margin-bottom: 2rem; border-radius: 12px;">
                 <h1 class="hero-title">Mistério das Giras</h1>
-                <h2 class="hero-subtitle">Pombagiras</h2>
-                <p class="hero-description">Explore o mundo místico das Pombagiras, entidades poderosas da Umbanda e Quimbanda, conhecidas por sua força, sedução e justiça.</p>
+                <h2 class="hero-subtitle">Pombagiras Conhecidas e Raras</h2>
+                <p class="hero-description">Explore o mundo místico das Pombagiras, entidades poderosas da Umbanda e Quimbanda. Conheça as Pombagiras tradicionais e descubra as entidades raras, cada uma com suas características únicas e poderes especiais.</p>
                 <div class="hero-divider"></div>
             </div>
         </section>
 
-        <section class="cards-section">
-            <header class="section-header">
-                <h2 class="section-title">As Pombagiras</h2>
-                <p class="section-subtitle">Clique em uma carta para ver os detalhes</p>
-            </header>
-            <div class="cards-grid" id="cardsGrid"></div>
+        <section class="tables-section">
+            <div class="tables-container">
+                <!-- Primeira Coluna: Pombagiras -->
+                <div class="pombagira-table">
+                    <header class="section-header">
+                        <h2 class="section-title">AS POMBAGIRAS</h2>
+                        <p class="section-subtitle">Entidades tradicionais e conhecidas</p>
+                    </header>
+                    <div class="cards-grid" id="pombagiraCardsGrid"></div>
+                </div>
+
+                <!-- Segunda Coluna: Pombagiras Raras -->
+                <div class="rare-table">
+                    <header class="section-header">
+                        <h2 class="section-title">POMBAGIRAS RARAS</h2>
+                        <p class="section-subtitle">Entidades menos conhecidas e especiais</p>
+                    </header>
+                    <div class="cards-grid" id="rareCardsGrid"></div>
+                </div>
+            </div>
         </section>
 
         <div id="detailSection"></div>
     </div>
 
     <script>
-        const baseImageUrl = 'https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/';
-
         const pombagiras = [
             {
                 "id": "maria-padilha",
                 "name": "Maria Padilha",
                 "attribute": "Comando/Realeza",
-                "image": "maria_padilha.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_padilha.png",
                 "day": "Sexta-feira",
                 "moonPhase": "Lua cheia",
                 "colors": ["Vermelho", "Dourado", "Preto"],
@@ -696,7 +753,7 @@
                 "id": "maria-mulambo",
                 "name": "Maria Mulambo",
                 "attribute": "Cura/Humildade",
-                "image": "maria_mulambo.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_mulambo.png",
                 "day": "Segunda-feira ou quarta-feira",
                 "moonPhase": "Lua minguante",
                 "colors": ["Branco", "Verde-claro", "Cinza"],
@@ -711,7 +768,7 @@
                 "id": "maria-quiteria",
                 "name": "Maria Quitéria",
                 "attribute": "Guerra/Proteção",
-                "image": "maria_quiteria.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_quiteria.png",
                 "day": "Terça-feira",
                 "moonPhase": "Lua crescente",
                 "colors": ["Vermelho", "Marrom", "Preto"],
@@ -726,7 +783,7 @@
                 "id": "rosa-caveira",
                 "name": "Rosa Caveira",
                 "attribute": "Justiça/Morte",
-                "image": "rosa_caveira.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/rosa_caveira.png",
                 "day": "Sábado",
                 "moonPhase": "Lua nova ou lua cheia",
                 "colors": ["Preto", "Vermelho-sangue", "Roxo"],
@@ -741,7 +798,7 @@
                 "id": "dama-noite",
                 "name": "Dama da Noite",
                 "attribute": "Mistério/Oculto",
-                "image": "dama_noite.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/dama_noite.png",
                 "day": "Sexta-feira (noite)",
                 "moonPhase": "Lua negra",
                 "colors": ["Preto", "Roxo", "Azul-escuro"],
@@ -756,7 +813,7 @@
                 "id": "sete-saias",
                 "name": "Sete Saias",
                 "attribute": "Alegria/Intensidade",
-                "image": "sete_saias.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/sete_saias.png",
                 "day": "Quinta-feira ou domingo",
                 "moonPhase": "Lua crescente ou cheia",
                 "colors": ["Vermelho", "Rosa", "Amarelo", "Multicolorido"],
@@ -771,7 +828,7 @@
                 "id": "cigana",
                 "name": "Pombagira Cigana",
                 "attribute": "Liberdade/Prosperidade",
-                "image": "cigana.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/cigana.png",
                 "day": "Quarta-feira",
                 "moonPhase": "Lua cheia",
                 "colors": ["Vermelho", "Dourado", "Verde"],
@@ -786,7 +843,7 @@
                 "id": "maria-navalha",
                 "name": "Maria Navalha",
                 "attribute": "Malandragem/Rua",
-                "image": "maria_navalha.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_navalha.png",
                 "day": "Terça-feira ou sexta-feira à noite",
                 "moonPhase": "Lua minguante",
                 "colors": ["Preto", "Vermelho", "Prata"],
@@ -801,7 +858,7 @@
                 "id": "praia",
                 "name": "Pombagira da Praia",
                 "attribute": "Emoção/Limpeza",
-                "image": "praia.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/praia.png",
                 "day": "Quinta-feira ou segunda-feira",
                 "moonPhase": "Lua cheia ou crescente",
                 "colors": ["Azul", "Branco", "Prata"],
@@ -816,7 +873,7 @@
                 "id": "maria-farrapo",
                 "name": "Maria Farrapo",
                 "attribute": "Sanidade/Caos Mental",
-                "image": "maria_farrapo.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/maria_farrapo.png",
                 "day": "Segunda-feira",
                 "moonPhase": "Lua minguante",
                 "colors": ["Branco sujo", "Cinza", "Lilás"],
@@ -831,7 +888,7 @@
                 "id": "menina",
                 "name": "Pombagira Menina",
                 "attribute": "Renovação/Inocência",
-                "image": "menina.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/menina.png",
                 "day": "Domingo",
                 "moonPhase": "Lua nova",
                 "colors": ["Rosa", "Branco", "Azul-claro"],
@@ -846,7 +903,7 @@
                 "id": "figueira",
                 "name": "Pombagira da Figueira",
                 "attribute": "Raiz/Ancestralidade",
-                "image": "figueira.png",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/figueira.png",
                 "day": "Sábado",
                 "moonPhase": "Lua minguante",
                 "colors": ["Marrom", "Verde-escuro", "Preto"],
@@ -859,7 +916,136 @@
             }
         ];
 
-        let selectedPombagira = null;
+        const rarePombagiras = [
+            {
+                "id": "almas",
+                "name": "Pombagira das Almas",
+                "attribute": "Luz/Transição",
+                "attributeFormatted": "Luz<br>Transição",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Almas.jpeg",
+                "day": "Segunda-feira",
+                "moonPhase": "Lua crescente",
+                "colors": ["Branco", "Prata", "Azul-celeste"],
+                "offerings": ["Velas brancas", "Água pura", "Flores brancas", "Incenso de mirra", "Orações"],
+                "description": "A Pombagira das Almas é uma entidade rara que trabalha com a luz e a transição das almas. Ela atua como uma guia espiritual, ajudando as almas em seu processo de passagem para o outro plano. É invocada para proteção espiritual, para ajudar entes queridos que partiram e para trabalhos de elevação espiritual. Sua energia é suave, porém poderosa, trazendo conforto e esclarecimento em momentos de perda.",
+                "signos": ["Câncer", "Peixes"],
+                "locais": ["Cemitérios ao amanhecer", "Capelas", "Altares simples"],
+                "simbolismo": ["Luz", "Asas", "Cálice", "Círculo"],
+                "utensílios": ["Cálice de prata", "Vela branca", "Incensário"]
+            },
+            {
+                "id": "sete-encruzilhadas",
+                "name": "Pombagira Sete Encruzilhadas",
+                "attribute": "Destino/Caminhos",
+                "attributeFormatted": "Destino<br>Caminhos",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Sete%20Encruzilhada.jpeg",
+                "day": "Sexta-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Vermelho", "Preto", "Dourado"],
+                "offerings": ["Velas vermelhas e pretas", "Charutos", "Rum", "Moedas antigas", "Chaves"],
+                "description": "A Pombagira Sete Encruzilhadas é a senhora dos destinos e dos caminhos que se cruzam. Cada uma das sete encruzilhadas representa uma escolha, um destino possível. Ela é invocada para abrir caminhos, tomar decisões difíceis e desfazer nós kármicos. É uma entidade que compreende a complexidade da vida e as múltiplas possibilidades que se apresentam a cada momento.",
+                "signos": ["Gêmeos", "Sagitário"],
+                "locais": ["Encruzilhadas de sete ruas", "Estradas antigas", "Cruzamentos"],
+                "simbolismo": ["Cruzamentos", "Estradas", "Bússola", "Mapa"],
+                "utensílios": ["Bússola", "Sete chaves", "Mapa antigo"]
+            },
+            {
+                "id": "lua",
+                "name": "Pombagira da Lua",
+                "attribute": "Intuição/Mistério",
+                "attributeFormatted": "Intuição<br>Mistério",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20da%20Lua.jpeg",
+                "day": "Segunda-feira",
+                "moonPhase": "Todas as fases",
+                "colors": ["Prata", "Branco", "Azul-prateado"],
+                "offerings": ["Velas prateadas", "Água da chuva", "Cristais de quartzo", "Flores noturnas", "Poções"],
+                "description": "A Pombagira da Lua é a guardiã dos mistérios lunares e da intuição feminina. Ela rege os ciclos, as marés emocionais e os segredos da noite. É invocada para trabalhos de intuição, sonhos proféticos, cura emocional e magia lunar. Sua energia muda conforme as fases da lua, sendo mais intensa na lua cheia e mais introspectiva na lua nova.",
+                "signos": ["Câncer", "Escorpião", "Peixes"],
+                "locais": ["Clareiras à luz da lua", "Lagos noturnos", "Mirantes"],
+                "simbolismo": ["Lua crescente", "Água", "Cristal", "Espelho de prata"],
+                "utensílios": ["Espelho prateado", "Cálice de prata", "Sinete lunar"]
+            },
+            {
+                "id": "trevas",
+                "name": "Pombagira das Trevas",
+                "attribute": "Conhecimento/Transformação",
+                "attributeFormatted": "Conhecimento<br>Transformação",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Trevas.jpeg",
+                "day": "Sábado",
+                "moonPhase": "Lua nova",
+                "colors": ["Preto", "Roxo-escuro", "Cinza"],
+                "offerings": ["Velas pretas", "Incenso de sálvia", "Vinho tinto", "Livros antigos", "Penhas"],
+                "description": "A Pombagira das Trevas não representa o mal, mas sim o conhecimento oculto e a transformação que ocorre nas profundezas. Ela é a guardiã dos segredos mais profundos da alma e do universo. Invocada para trabalhos de autoconhecimento, superação de medos e transformação radical. Sua energia é intensa e requer preparo espiritual.",
+                "signos": ["Escorpião", "Capricórnio"],
+                "locais": ["Cavernas", "Florestas densas", "Locais abandonados à noite"],
+                "simbolismo": ["Livro fechado", "Chave negra", "Portal", "Coruja"],
+                "utensílios": ["Livro negro", "Chave de ferro", "Cajado escuro"]
+            },
+            {
+                "id": "serra",
+                "name": "Pombagira da Serra",
+                "attribute": "Força/Estabilidade",
+                "attributeFormatted": "Força<br>Estabilidade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20da%20Serra.jpeg",
+                "day": "Quinta-feira",
+                "moonPhase": "Lua crescente",
+                "colors": ["Verde", "Marrom", "Cinza"],
+                "offerings": ["Pedras da serra", "Ervas do campo", "Mel silvestre", "Cachaça", "Frutas da estação"],
+                "description": "A Pombagira da Serra é a senhora das montanhas e da terra firme. Ela representa a força, a estabilidade e a resistência. É invocada para proteção do lar, firmeza em decisões, conexão com a natureza e trabalhos de enraizamento. Sua energia é sólida como a rocha, oferecendo apoio inabalável nos momentos difíceis.",
+                "signos": ["Touro", "Capricórnio", "Virgem"],
+                "locais": ["Montanhas", "Serras", "Pedreiras", "Campos altos"],
+                "simbolismo": ["Montanha", "Raízes", "Rocha", "Águia"],
+                "utensílios": ["Cajado de madeira", "Pedra da serra", "Vaso de barro"]
+            },
+            {
+                "id": "fogo",
+                "name": "Pombagira do Fogo",
+                "attribute": "Paixão/Transformação",
+                "attributeFormatted": "Paixão<br>Transformação",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20do%20Fogo.jpeg",
+                "day": "Terça-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Vermelho", "Laranja", "Amarelo", "Dourado"],
+                "offerings": ["Velas vermelhas", "Pimentas", "Cachaça ardente", "Carvão", "Incenso de canela"],
+                "description": "A Pombagira do Fogo é a senhora das paixões ardentes e da transformação pelo fogo. Ela queima o velho para dar lugar ao novo, transforma a energia e acende a chama da vontade. É invocada para paixões, coragem, iniciativa e proteção contra energias negativas. Sua energia é quente, intensa e purificadora.",
+                "signos": ["Áries", "Leão", "Sagitário"],
+                "locais": ["Lareiras", "Fogueiras", "Forjas", "Vulcões (simbólicos)"],
+                "simbolismo": ["Chama", "Espada flamejante", "Fênix", "Sol"],
+                "utensílios": ["Tocha", "Espada de fogo", "Braseiro"]
+            },
+            {
+                "id": "aguas-profundas",
+                "name": "Pombagira das Águas Profundas",
+                "attribute": "Emoções/Inconsciente",
+                "attributeFormatted": "Emoções<br>Inconsciente",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Aguas%20Profunda.jpeg",
+                "day": "Segunda-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Azul-marinho", "Verde-água", "Prata"],
+                "offerings": ["Água do mar", "Conchas", "Velas azuis", "Perfumes aquáticos", "Pedras aquáticas"],
+                "description": "A Pombagira das Águas Profundas rege as emoções mais profundas, o inconsciente coletivo e os segredos do oceano. Ela é invocada para trabalhos emocionais, cura de traumas, intuição profunda e conexão com o mundo onírico. Sua energia é calma na superfície, mas poderosa nas profundezas.",
+                "signos": ["Câncer", "Escorpião", "Peixes"],
+                "locais": ["Oceanos", "Lagos profundos", "Grutas marinhas", "Fontes naturais"],
+                "simbolismo": ["Onda", "Concha", "Sereia", "Âncora"],
+                "utensílios": ["Concha grande", "Rede", "Âncora pequena"]
+            },
+            {
+                "id": "sombra",
+                "name": "Pombagira das Sombras",
+                "attribute": "Proteção/Anonimato",
+                "attributeFormatted": "Proteção<br>Anonimato",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/Pombagira%20das%20Sombras.jpeg",
+                "day": "Sexta-feira à noite",
+                "moonPhase": "Lua minguante",
+                "colors": ["Preto", "Cinza-escuro", "Roxo"],
+                "offerings": ["Velas pretas", "Incenso de patchouli", "Vinho seco", "Chaves velhas", "Tecidos escuros"],
+                "description": "A Pombagira das Sombras é a guardiã do anonimato e da proteção nas sombras. Ela ensina a arte da discrição, protege segredos e oferece abrigo nos momentos de vulnerabilidade. É invocada para proteção contra olho gordo, para trabalhos discretos e para afastar inimigos ocultos.",
+                "signos": ["Escorpião", "Capricórnio", "Aquário"],
+                "locais": ["Becos escuros", "Portais sombrios", "Encruzilhadas noturnas"],
+                "simbolismo": ["Sombra", "Véu", "Portal oculto", "Morcego"],
+                "utensílios": ["Véu negro", "Chave antiga", "Cajado escuro"]
+            }
+        ];
 
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
@@ -874,81 +1060,104 @@
             }
         }
 
+        function createCard(pombagira, isRare = false) {
+            const cardWrapper = document.createElement('div');
+            cardWrapper.className = 'card-wrapper';
+            cardWrapper.setAttribute('data-id', pombagira.id);
+            cardWrapper.onclick = () => showDetails(pombagira.id, isRare);
+
+            const card = document.createElement('div');
+            card.className = 'pombagira-card';
+
+            const front = document.createElement('div');
+            front.className = 'card-front';
+            
+            // Usamos attributeFormatted se existir, senão usamos o attribute normal
+            const attributeText = pombagira.attributeFormatted || pombagira.attribute;
+            
+            let frontHTML = `
+                <div class="card-border-outer">
+                    <div class="card-border-inner">
+                        <div class="card-content">
+                            ${isRare ? '<div class="rare-badge">RARA</div>' : ''}
+                            <div class="card-top-ornament">
+                                <span class="ornament-diamond">◆</span>
+                            </div>
+                            <div class="card-image-wrapper">
+                                <img src="${pombagira.image}" alt="${pombagira.name}" class="card-image">
+                            </div>
+                            <div class="card-text-section">
+                                <h3 class="card-name">${pombagira.name}</h3>
+                                <p class="card-attribute">${attributeText}</p>
+                            </div>
+                            <div class="card-bottom-ornament">
+                                <span class="ornament-diamond">◆</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            front.innerHTML = frontHTML;
+
+            const back = document.createElement('div');
+            back.className = 'card-back';
+            back.innerHTML = `
+                <div class="card-border-outer">
+                    <div class="card-border-inner">
+                        <div class="card-back-content">
+                            <div class="back-section">
+                                <h4 class="back-label">Dia</h4>
+                                <p class="back-value">${pombagira.day}</p>
+                            </div>
+                            <div class="back-section">
+                                <h4 class="back-label">Fase Lunar</h4>
+                                <p class="back-value">${pombagira.moonPhase}</p>
+                            </div>
+                            <div class="back-section">
+                                <h4 class="back-label">Cores</h4>
+                                <div class="colors-display">
+                                    ${pombagira.colors.map(color => `<span class="color-tag">${color}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="back-section">
+                                <h4 class="back-label">Oferendas</h4>
+                                <p class="back-value">${pombagira.offerings.slice(0, 3).join(', ')}...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            card.appendChild(front);
+            card.appendChild(back);
+            cardWrapper.appendChild(card);
+            return cardWrapper;
+        }
+
         function renderCards() {
-            const cardsGrid = document.getElementById('cardsGrid');
-            cardsGrid.innerHTML = '';
+            const pombagiraCardsGrid = document.getElementById('pombagiraCardsGrid');
+            pombagiraCardsGrid.innerHTML = '';
 
             pombagiras.forEach(pombagira => {
-                const cardWrapper = document.createElement('div');
-                cardWrapper.className = 'card-wrapper';
-                cardWrapper.setAttribute('data-id', pombagira.id);
-                cardWrapper.onclick = () => showDetails(pombagira.id);
+                const card = createCard(pombagira, false);
+                pombagiraCardsGrid.appendChild(card);
+            });
 
-                const card = document.createElement('div');
-                card.className = 'pombagira-card';
+            const rareCardsGrid = document.getElementById('rareCardsGrid');
+            rareCardsGrid.innerHTML = '';
 
-                const front = document.createElement('div');
-                front.className = 'card-front';
-                front.innerHTML = `
-                    <div class="card-border-outer">
-                        <div class="card-border-inner">
-                            <div class="card-content">
-                                <div class="card-top-ornament">
-                                    <span class="ornament-diamond">◆</span>
-                                </div>
-                                <div class="card-image-wrapper">
-                                    <img src="${baseImageUrl + pombagira.image}" alt="${pombagira.name}" class="card-image">
-                                </div>
-                                <div class="card-text-section">
-                                    <h3 class="card-name">${pombagira.name}</h3>
-                                    <p class="card-attribute">${pombagira.attribute}</p>
-                                </div>
-                                <div class="card-bottom-ornament">
-                                    <span class="ornament-diamond">◆</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                const back = document.createElement('div');
-                back.className = 'card-back';
-                back.innerHTML = `
-                    <div class="card-border-outer">
-                        <div class="card-border-inner">
-                            <div class="card-back-content">
-                                <div class="back-section">
-                                    <h4 class="back-label">Dia</h4>
-                                    <p class="back-value">${pombagira.day}</p>
-                                </div>
-                                <div class="back-section">
-                                    <h4 class="back-label">Fase Lunar</h4>
-                                    <p class="back-value">${pombagira.moonPhase}</p>
-                                </div>
-                                <div class="back-section">
-                                    <h4 class="back-label">Cores</h4>
-                                    <div class="colors-display">
-                                        ${pombagira.colors.map(color => `<span class="color-tag">${color}</span>`).join('')}
-                                    </div>
-                                </div>
-                                <div class="back-section">
-                                    <h4 class="back-label">Oferendas</h4>
-                                    <p class="back-value">${pombagira.offerings.slice(0, 3).join(', ')}...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-
-                card.appendChild(front);
-                card.appendChild(back);
-                cardWrapper.appendChild(card);
-                cardsGrid.appendChild(cardWrapper);
+            rarePombagiras.forEach(pombagira => {
+                const card = createCard(pombagira, true);
+                rareCardsGrid.appendChild(card);
             });
         }
 
-        function showDetails(id) {
-            const pombagira = pombagiras.find(p => p.id === id);
+        function showDetails(id, isRare = false) {
+            const pombagira = isRare ? 
+                rarePombagiras.find(p => p.id === id) : 
+                pombagiras.find(p => p.id === id);
+            
             if (!pombagira) return;
 
             const detailSection = document.getElementById('detailSection');
@@ -958,7 +1167,8 @@
                         <button class="close-button" onclick="closeDetails()">✕</button>
                         <div class="detail-content">
                             <div class="detail-image">
-                                <img src="${baseImageUrl + pombagira.image}" alt="${pombagira.name}">
+                                <img src="${pombagira.image}" alt="${pombagira.name}">
+                                ${isRare ? '<div class="rare-badge" style="position: absolute; top: 20px; right: 20px;">ENTIDADE RARA</div>' : ''}
                             </div>
                             <div class="detail-info">
                                 <h2 class="detail-name">${pombagira.name}</h2>
