@@ -28,3 +28,9 @@ Portal místico interativo dedicado às **Pombagiras** da Umbanda e Quimbanda �
 ---
 
 ### 📂 Estrutura do Repositório
+
+
+misterio-das-giras/
+├── index.html     ← Página principal (único arquivo necessário)
+├── README.md      ← Este arquivo
+└── (imagens hospedadas via raw.githubusercontent.com)
