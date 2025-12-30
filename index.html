@@ -1032,7 +1032,7 @@
             </p>
             <div class="footer-divider"></div>
             <p class="warning-signature">— As Pombagiras</p>
-            <p class="footer-credits">Mistério das Giras © 2024 — Com respeito às tradições ancestrais</p>
+            <p class="footer-credits">Mistério das Giras © 2026 — Com respeito às tradições ancestrais</p>
         </footer>
     </div>
 
@@ -1040,6 +1040,40 @@
         // Configuração Supabase
         const SUPABASE_URL = 'https://rbygxkbewzknvjjhxdvw.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJieWd4a2Jld3prbnZqamh4ZHZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwMDcxNjQsImV4cCI6MjA4MTU4MzE2NH0.YrHF9HEGo6yv9MyNsPzFgBhaAB1DRh2SLU8f7L6s1nY';
+        const PAGE_NAME = 'pombagiras';
+        
+        /*
+        ========================================
+        INSTRUÇÕES PARA CRIAR A TABELA NO SUPABASE:
+        ========================================
+        1. Acesse: https://supabase.com/dashboard
+        2. Selecione seu projeto: rbygxkbewzknvjjhxdvw
+        3. Vá em "SQL Editor" no menu lateral
+        4. Execute o seguinte SQL:
+        
+        CREATE TABLE IF NOT EXISTS visits (
+            id BIGSERIAL PRIMARY KEY,
+            session_id TEXT,
+            visited_at TIMESTAMPTZ DEFAULT NOW(),
+            page TEXT DEFAULT 'home'
+        );
+        
+        -- Habilitar RLS (Row Level Security)
+        ALTER TABLE visits ENABLE ROW LEVEL SECURITY;
+        
+        -- Política para permitir INSERT anônimo
+        CREATE POLICY "Allow anonymous insert" ON visits
+            FOR INSERT TO anon
+            WITH CHECK (true);
+        
+        -- Política para permitir SELECT anônimo
+        CREATE POLICY "Allow anonymous select" ON visits
+            FOR SELECT TO anon
+            USING (true);
+        
+        5. Clique em "Run" para executar
+        ========================================
+        */
         
         // Dados das Pombagiras
         const pombagiras = [
@@ -1424,72 +1458,125 @@
             }
         ];
 
-        // Sistema de contador com fallback local
-        let localVisitCount = parseInt(localStorage.getItem('local_visit_count') || '0');
+        // Sistema de contador usando tabela page_views do Supabase
+        let currentViewCount = 0;
 
-        // Função para registrar visitas no Supabase com fallback
+        // Função para registrar visitas e incrementar contador
         async function trackVisit() {
-            const counterElement = document.getElementById('visitCount');
+            console.log('🔮 Iniciando rastreamento de visitas...');
             
-            try {
-                // Verificar se já visitou nesta sessão
-                const hasVisited = sessionStorage.getItem('has_visited');
+            // Verificar se já visitou nesta sessão
+            const hasVisited = sessionStorage.getItem('pombagira_visited');
+            
+            if (!hasVisited) {
+                sessionStorage.setItem('pombagira_visited', 'true');
+                console.log('📊 Nova sessão detectada, incrementando contador...');
                 
-                if (!hasVisited) {
-                    // Incrementar contador local
-                    localVisitCount++;
-                    localStorage.setItem('local_visit_count', localVisitCount.toString());
-                    sessionStorage.setItem('has_visited', 'true');
+                // Incrementar contador no Supabase usando RPC ou UPDATE
+                try {
+                    // Primeiro, obter o valor atual
+                    const getResponse = await fetch(
+                        `${SUPABASE_URL}/rest/v1/page_views?page=eq.${PAGE_NAME}&select=view_count`,
+                        {
+                            method: 'GET',
+                            headers: {
+                                'apikey': SUPABASE_KEY,
+                                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                                'Content-Type': 'application/json'
+                            }
+                        }
+                    );
                     
-                    // Tentar registrar no Supabase
-                    const sessionId = 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-                    
-                    await fetch(`${SUPABASE_URL}/rest/v1/visits`, {
-                        method: 'POST',
+                    if (getResponse.ok) {
+                        const data = await getResponse.json();
+                        console.log('📥 Dados recebidos:', data);
+                        
+                        if (data && data.length > 0) {
+                            const newCount = (data[0].view_count || 0) + 1;
+                            
+                            // Atualizar o contador
+                            const updateResponse = await fetch(
+                                `${SUPABASE_URL}/rest/v1/page_views?page=eq.${PAGE_NAME}`,
+                                {
+                                    method: 'PATCH',
+                                    headers: {
+                                        'apikey': SUPABASE_KEY,
+                                        'Authorization': `Bearer ${SUPABASE_KEY}`,
+                                        'Content-Type': 'application/json',
+                                        'Prefer': 'return=representation'
+                                    },
+                                    body: JSON.stringify({ view_count: newCount })
+                                }
+                            );
+                            
+                            if (updateResponse.ok) {
+                                const updatedData = await updateResponse.json();
+                                console.log('✅ Contador atualizado no Supabase:', updatedData);
+                                if (updatedData && updatedData.length > 0) {
+                                    currentViewCount = updatedData[0].view_count;
+                                    updateCounterDisplay(currentViewCount);
+                                    return;
+                                }
+                            } else {
+                                console.warn('⚠️ Erro ao atualizar:', await updateResponse.text());
+                            }
+                        } else {
+                            console.warn('⚠️ Página não encontrada na tabela page_views. Execute o SQL para criar a entrada.');
+                        }
+                    } else {
+                        console.warn('⚠️ Erro ao obter dados:', await getResponse.text());
+                    }
+                } catch (error) {
+                    console.warn('⚠️ Erro de conexão:', error.message);
+                }
+            }
+            
+            // Obter contagem atual (sem incrementar)
+            await updateVisitCount();
+        }
+
+        async function updateVisitCount() {
+            try {
+                const response = await fetch(
+                    `${SUPABASE_URL}/rest/v1/page_views?page=eq.${PAGE_NAME}&select=view_count`,
+                    {
+                        method: 'GET',
                         headers: {
-                            'Content-Type': 'application/json',
                             'apikey': SUPABASE_KEY,
                             'Authorization': `Bearer ${SUPABASE_KEY}`,
-                            'Prefer': 'return=minimal'
-                        },
-                        body: JSON.stringify({
-                            session_id: sessionId,
-                            visited_at: new Date().toISOString(),
-                            user_agent: navigator.userAgent.substring(0, 200)
-                        })
-                    });
-                }
-                
-                // Obter contagem do Supabase
-                const response = await fetch(`${SUPABASE_URL}/rest/v1/visits?select=id`, {
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                            'Content-Type': 'application/json'
+                        }
                     }
-                });
+                );
                 
                 if (response.ok) {
-                    const visits = await response.json();
-                    const count = visits.length;
+                    const data = await response.json();
+                    console.log('📈 Dados do Supabase:', data);
                     
-                    // Usar o maior valor entre Supabase e local
-                    const displayCount = Math.max(count, localVisitCount);
-                    updateCounterDisplay(displayCount);
+                    if (data && data.length > 0 && data[0].view_count !== undefined) {
+                        currentViewCount = data[0].view_count;
+                        updateCounterDisplay(currentViewCount);
+                        console.log('✅ Contador carregado:', currentViewCount);
+                        return;
+                    } else {
+                        console.warn('⚠️ Entrada não encontrada. Execute: INSERT INTO public.page_views (page, view_count) VALUES (\'pombagiras\', 0) ON CONFLICT (page) DO NOTHING;');
+                    }
                 } else {
-                    // Fallback para contador local
-                    updateCounterDisplay(localVisitCount);
+                    console.warn('⚠️ Erro HTTP:', response.status, await response.text());
                 }
             } catch (error) {
-                console.log('Usando contador local:', error);
-                // Fallback para contador local
-                updateCounterDisplay(localVisitCount);
+                console.warn('⚠️ Erro de conexão:', error.message);
             }
+            
+            // Fallback: mostrar 0 ou valor em cache
+            updateCounterDisplay(currentViewCount || 0);
         }
 
         function updateCounterDisplay(count) {
             const counterElement = document.getElementById('visitCount');
             if (counterElement) {
-                const formattedCount = count.toLocaleString('pt-BR');
+                const displayCount = Math.max(count, 0);
+                const formattedCount = displayCount.toLocaleString('pt-BR');
                 counterElement.textContent = formattedCount;
                 
                 // Animação sutil
@@ -1497,29 +1584,16 @@
                 setTimeout(() => {
                     counterElement.style.transform = 'scale(1)';
                 }, 300);
+                
+                console.log('🔢 Display atualizado:', formattedCount);
             }
         }
 
-        // Atualizar contador periodicamente
+        // Atualizar contador periodicamente (a cada 30 segundos)
         function startCounterRefresh() {
             setInterval(async () => {
-                try {
-                    const response = await fetch(`${SUPABASE_URL}/rest/v1/visits?select=id`, {
-                        headers: {
-                            'apikey': SUPABASE_KEY,
-                            'Authorization': `Bearer ${SUPABASE_KEY}`
-                        }
-                    });
-                    
-                    if (response.ok) {
-                        const visits = await response.json();
-                        const count = Math.max(visits.length, localVisitCount);
-                        updateCounterDisplay(count);
-                    }
-                } catch (error) {
-                    // Silencioso em caso de erro
-                }
-            }, 30000); // Atualiza a cada 30 segundos
+                await updateVisitCount();
+            }, 30000);
         }
 
         function createStars() {
