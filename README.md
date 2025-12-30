@@ -23,7 +23,7 @@ Portal místico interativo dedicado às **Pombagiras** da Umbanda e Quimbanda �
 
 ### 🚀 Demo ao Vivo
 
-🔮 **[Acesse o Portal Aqui](https://alexialuzdeferro.github.io/misterio-das-giras/)**
+🔮 **[Acesse o Portal Aqui](https://alexialuzdeferro.github.io/giras/)**
 
 ---
 
