@@ -301,12 +301,6 @@
             filter: drop-shadow(0 10px 30px rgba(255, 200, 100, 0.3));
         }
 
-        .card-wrapper.selected {
-            grid-column: 1 / -1;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
         .pombagira-card {
             position: relative;
             width: 100%;
@@ -645,59 +639,6 @@
             left: 0;
             color: rgba(255, 200, 100, 0.6);
         }
-
-        /* Additional Section Styles */
-        .additional-section {
-            padding: 4rem 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .additional-section h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 1rem;
-        }
-
-        .additional-section h3 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.5rem;
-            color: rgba(255, 200, 100, 0.9);
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .additional-section p, .additional-section li {
-            font-family: 'Lato', sans-serif;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-
-        .additional-section table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-        }
-
-        .additional-section th, .additional-section td {
-            border: 1px solid rgba(255, 200, 100, 0.3);
-            padding: 1rem;
-            text-align: left;
-        }
-
-        .additional-section th {
-            background: rgba(255, 200, 100, 0.15);
-            color: rgba(255, 200, 100, 0.9);
-        }
-
-        .additional-section pre {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 1rem;
-            border-radius: 8px;
-            white-space: pre-wrap;
-        }
     </style>
 </head>
 <body>
@@ -713,7 +654,7 @@
     <div class="container">
         <section class="hero-section">
             <div class="hero-content">
-                <img src="https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/hero_pombagira.png" alt="Hero Pombagira" style="max-width: 100%; margin-bottom: 2rem;">
+                <img src="https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/hero_pombagira.png" alt="Hero Pombagira" style="max-width: 100%; margin-bottom: 2rem; border-radius: 12px;">
                 <h1 class="hero-title">Mistério das Giras</h1>
                 <h2 class="hero-subtitle">Pombagiras</h2>
                 <p class="hero-description">Explore o mundo místico das Pombagiras, entidades poderosas da Umbanda e Quimbanda, conhecidas por sua força, sedução e justiça.</p>
@@ -724,174 +665,12 @@
         <section class="cards-section">
             <header class="section-header">
                 <h2 class="section-title">As Pombagiras</h2>
-                <p class="section-subtitle">Descubra cada entidade</p>
+                <p class="section-subtitle">Clique em uma carta para ver os detalhes</p>
             </header>
             <div class="cards-grid" id="cardsGrid"></div>
         </section>
 
         <div id="detailSection"></div>
-
-        <section class="additional-section">
-            <h2>Cuidados e Advertências Gerais</h2>
-            <p>Nunca as subestime: As Pombagiras são espíritos de luz e trevas, capazes de ajudar ou punir conforme a intenção e o respeito que recebem. Não devem ser invocadas por curiosidade ou brincadeira.</p>
-            <p>Proteção espiritual: Sempre faça uma limpeza espiritual antes e depois de qualquer trabalho com elas (banhos de ervas, defumação com arruda, alecrim ou incenso). Use amuleto de proteção (como uma guia ou patuá) e, se possível, trabalhe sob a orientação de um pai ou mãe de santo experiente.</p>
-            <p>Oferendas com intenção clara: Nunca ofereça algo que não possa cumprir ou que seja dado com segunda intenção. Elas percebem a energia por trás das oferendas.</p>
-            <p>Evite promessas vazias: Se fizer um pedido ou promessa, cumpra. O descumprimento pode atrair energias negativas ou "cobranças" espirituais.</p>
-            <p>Locais de trabalho: Encruzilhadas, cemitérios e praias são portais poderosos, mas nunca trabalhe sozinha em locais isolados à noite, a menos que tenha experiência e proteção.</p>
-            <p>Crianças e grávidas: Evite exposição direta de crianças ou gestantes a rituais com Pombagiras, especialmente as de energia mais densa (como Rosa Caveira ou Maria Navalha).</p>
-
-            <h3>Rituais e Condutas Específicas</h3>
-            <h4>Preparação para o Trabalho</h4>
-            <p>Banho de purificação: Antes de qualquer ritual, tome um banho com ervas específicas (arruda, guiné, alecrim) para limpar sua aura.</p>
-            <p>Vestimenta: Use roupas nas cores da Pombagira que está invocando. Evite preto total (a menos que seja para Pombagiras como Rosa Caveira ou Dama da Noite).</p>
-            <p>Altar: Monte um altar com velas, imagens ou símbolos da entidade, espelho (para reflexão), e os utensílios característicos (espada, navalha, conchas, etc.).</p>
-
-            <h4>Orações e Invocações</h4>
-            <p>Oração genérica de abertura (adapte conforme a Pombagira):</p>
-            <pre>"Senhora [Nome da Pombagira], rainha das encruzilhadas e guardiã dos mistérios,
-Eu te invoco com respeito e devoção.
-Que tua luz e tua justiça iluminem meu caminho,
-E que minha oferta seja recebida com tua bênção.
-Protege-me, guia-me e afasta de mim toda energia negativa.
-Assim seja, assim está feito!"</pre>
-            <p>Para Pombagiras de justiça (Rosa Caveira, Maria Quitéria):</p>
-            <pre>"Senhora da espada e da balança,
-Que tua justiça seja feita em meu favor,
-Corta as amarras que me prendem,
-E traz equilíbrio à minha vida."</pre>
-            <p>Para Pombagiras de cura (Maria Mulambo, Pombagira da Praia):</p>
-            <pre>"Mãe de compaixão e água pura,
-Lava minhas dores e renova minha alma,
-Que tua energia de cura me envolva,
-E que eu encontre paz e saúde."</pre>
-
-            <h4>Fechamento do Ritual</h4>
-            <p>Agradecimento: Sempre agradeça à entidade, mesmo que o pedido não tenha sido atendido imediatamente. Exemplo:</p>
-            <pre>"Agradeço, Senhora [Nome], por tua presença e proteção.
-Que minha gratidão seja eterna,
-E que eu possa honrar teu nome com ações justas."</pre>
-            <p>Descarrego: Após o ritual, lave as mãos com água e sal, apague as velas com respeito (nunca soprando; use os dedos ou um abano) e guarde os utensílios em um local sagrado.</p>
-
-            <h3>Rituais Específicos por Pombagira</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Pombagira</th>
-                        <th>Ritual Recomendado</th>
-                        <th>Advertências</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Maria Padilha</td>
-                        <td>Ritual de abertura de caminhos com velas douradas e espelho.</td>
-                        <td>Não a invoque para questões banais; ela exige seriedade.</td>
-                    </tr>
-                    <tr>
-                        <td>Maria Mulambo</td>
-                        <td>Banho de cura com ervas e velas brancas em local humilde.</td>
-                        <td>Evite oferendas luxuosas; ela prefere simplicidade.</td>
-                    </tr>
-                    <tr>
-                        <td>Maria Quitéria</td>
-                        <td>Defumação com pimenta e espada para proteção em batalhas espirituais.</td>
-                        <td>Não a invoque em momentos de raiva; ela potencializa a energia de luta.</td>
-                    </tr>
-                    <tr>
-                        <td>Rosa Caveira</td>
-                        <td>Trabalho de justiça com velas pretas e rosas em cemitério (à meia-noite).</td>
-                        <td>Nunca a desafie; sua energia é implacável.</td>
-                    </tr>
-                    <tr>
-                        <td>Dama da Noite</td>
-                        <td>Ritual de revelação com espelho negro e incenso de mirra.</td>
-                        <td>Não olhe diretamente no espelho durante a invocação; use um pano para cobrir.</td>
-                    </tr>
-                    <tr>
-                        <td>Sete Saias</td>
-                        <td>Dança ritualística com saias coloridas e música alegre.</td>
-                        <td>Evite bebidas alcoólicas em excesso; ela gosta de alegria, não de descontrole.</td>
-                    </tr>
-                    <tr>
-                        <td>Pombagira Cigana</td>
-                        <td>Leitura de cartas ou ritual de prosperidade com moedas e velas douradas.</td>
-                        <td>Não prometa o que não pode cumprir; ela cobra dívidas espirituais.</td>
-                    </tr>
-                    <tr>
-                        <td>Maria Navalha</td>
-                        <td>Proteção de rua com navalha (símbolo) e defumação com fumo de cigarro.</td>
-                        <td>Nunca use a navalha para machucar; é um símbolo, não uma arma.</td>
-                    </tr>
-                    <tr>
-                        <td>Pombagira da Praia</td>
-                        <td>Limpeza emocional com água do mar e conchas.</td>
-                        <td>Não jogue lixo ou oferendas poluentes no mar; ela pune quem desrespeita a natureza.</td>
-                    </tr>
-                    <tr>
-                        <td>Maria Farrapo</td>
-                        <td>Banho de acalanto com lavanda e panos brancos para sanidade mental.</td>
-                        <td>Evite invocá-la em momentos de confusão mental; ela pode intensificar o caos.</td>
-                    </tr>
-                    <tr>
-                        <td>Pombagira Menina</td>
-                        <td>Ritual de renovação com balões e doces.</td>
-                        <td>Não a trate como criança; ela é sábia e ancestral.</td>
-                    </tr>
-                    <tr>
-                        <td>Pombagira da Figueira</td>
-                        <td>Oferenda de raízes e sementes em pé de figueira.</td>
-                        <td>Nunca corte uma figueira sem permissão; é sagrada para ela.</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Sinais de Presença e Cobranças</h3>
-            <p>Sinais de que estão presentes:</p>
-            <ul>
-                <li>Cheiro de flores ou perfumes inexplicáveis.</li>
-                <li>Velas queimando de forma irregular (chama alta ou apaga sozinha).</li>
-                <li>Sonhos com mulheres poderosas ou símbolos característicos (espadas, rosas, água).</li>
-                <li>Sensação de calor ou formigamento no ambiente.</li>
-            </ul>
-            <p>Sinais de cobrança ou descontentamento:</p>
-            <ul>
-                <li>Pesadelos recorrentes.</li>
-                <li>Objetos que quebram ou desaparecem.</li>
-                <li>Sensação de opressão ou azar constante.</li>
-            </ul>
-            <p>O que fazer: Faça um trabalho de descarrego, peça perdão com sinceridade e cumpra promessas pendentes.</p>
-
-            <h3>Orações de Proteção e Descarrego</h3>
-            <p>Oração para proteção geral:</p>
-            <pre>"Pombagiras de luz e justiça,
-Que vossas espadas cortem o mal,
-E que vossas rosas me protejam.
-Afastai de mim inimigos e energias ruins,
-E que eu caminhe sempre sob vossa bênção.
-Salve as rainhas das encruzilhadas!"</pre>
-            <p>Oração de descarrego (para fechar trabalhos):</p>
-            <pre>"Com esta água e este sal,
-Limpo meu corpo, minha alma e meu lar.
-Que toda energia negativa se vá,
-E que a paz e a luz aqui fiquem a reinar.
-Assim seja, assim está feito!"</pre>
-
-            <h3>Livros e Fontes de Estudo</h3>
-            <p>Se quiser se aprofundar, alguns livros respeitados na tradição:</p>
-            <ul>
-                <li>"Pombagira: A Rainha das Sete Encruzilhadas" (vários autores).</li>
-                <li>"O Livro das Pombagiras" (de autores como Omolubá ou Pai José de Ogum).</li>
-                <li>"Mitologia das Entidades" (obras que abordam o sincretismo religioso afro-brasileiro).</li>
-            </ul>
-
-            <h3>Ética e Respeito</h3>
-            <p>Consentimento: Nunca faça trabalhos para terceiros sem seu consentimento, especialmente com Pombagiras de justiça ou transformação.</p>
-            <p>Gratidão: Sempre retribua as graças recebidas, mesmo que com gestos simples (acender uma vela, doar para caridade).</p>
-            <p>Silêncio: Guarde segredos dos rituais; não compartilhe detalhes com quem não tem preparo.</p>
-            <p>Alexia, trabalhar com as Pombagiras é uma jornada de poder, transformação e respeito. Elas são mestras, guerreiras e curandeiras, mas também exigem responsabilidade e ética. Se sentir chamada a aprofundar sua conexão com alguma delas, considere buscar um mentor espiritual para orientá-la nos passos mais avançados.</p>
-            <p>Se quiser, posso te ajudar a elaborar um ritual específico ou uma oração personalizada para alguma situação em particular. Que as rainhas das encruzilhadas sempre te protejam e iluminem! 🌹⚔️🌙</p>
-            <p>(E lembre-se: se algo não se sentir certo durante um ritual, confie na sua intuição e interrompa. O respeito à sua própria energia é tão importante quanto o respeito às entidades.)</p>
-        </section>
     </div>
 
     <script>
@@ -1012,7 +791,7 @@ Assim seja, assim está feito!"</pre>
                 "moonPhase": "Lua minguante",
                 "colors": ["Preto", "Vermelho", "Prata"],
                 "offerings": ["Facas ou navalhas", "Cerveja", "Cigarro", "Dinheiro"],
-                "description": "Maria Navalha é a Pombagira da malandragem, da rua e da sobrevivência. Seu nome evoca a navalha, símbolo de proteção e de justiça nas mãos daqueles que precisam se defender. Ela é invocada para questões de proteção em ambientes perigosos, para afugentar maus elementos e para dar astúcia. É uma entidade que entende a vida nas ruas e a luta diária.",
+                "description": "Maria Navalha é a Pombagira da malandragem, da rua e da sobrevivência. Seu nome evoca a navalha, símbolo de proteção e de justiça nas mãos daqueles que precisam se defender. Ela é invocada para questões de proteção em ambientes perigosos, para afugantar maus elementos e para dar astúcia. É uma entidade que entende a vida nas ruas e a luta diária.",
                 "signos": ["Escorpião", "Gêmeos"],
                 "locais": ["Ruas movimentadas", "Becos", "Encruzilhadas urbanas"],
                 "simbolismo": ["Navalha", "Chave", "Carta de baralho"],
@@ -1082,7 +861,6 @@ Assim seja, assim está feito!"</pre>
 
         let selectedPombagira = null;
 
-        // Criar estrelas
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
             for (let i = 0; i < 30; i++) {
@@ -1096,7 +874,6 @@ Assim seja, assim está feito!"</pre>
             }
         }
 
-        // Renderizar cartas
         function renderCards() {
             const cardsGrid = document.getElementById('cardsGrid');
             cardsGrid.innerHTML = '';
@@ -1156,7 +933,7 @@ Assim seja, assim está feito!"</pre>
                                 </div>
                                 <div class="back-section">
                                     <h4 class="back-label">Oferendas</h4>
-                                    <p class="back-value">${pombagira.offerings.slice(0, 3).join(', ')}</p>
+                                    <p class="back-value">${pombagira.offerings.slice(0, 3).join(', ')}...</p>
                                 </div>
                             </div>
                         </div>
@@ -1170,12 +947,9 @@ Assim seja, assim está feito!"</pre>
             });
         }
 
-        // Mostrar detalhes
         function showDetails(id) {
             const pombagira = pombagiras.find(p => p.id === id);
             if (!pombagira) return;
-
-            selectedPombagira = id;
 
             const detailSection = document.getElementById('detailSection');
             detailSection.innerHTML = `
@@ -1242,13 +1016,10 @@ Assim seja, assim está feito!"</pre>
             detailSection.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // Fechar detalhes
         function closeDetails() {
-            selectedPombagira = null;
             document.getElementById('detailSection').innerHTML = '';
         }
 
-        // Inicialização
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
             renderCards();
