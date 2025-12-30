@@ -181,6 +181,41 @@
             animation: fadeInUp 1s ease-out;
         }
 
+        /* Estilo aprimorado para a imagem hero */
+        .hero-image-container {
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 
+                0 0 60px rgba(255, 200, 100, 0.3),
+                0 0 100px rgba(147, 51, 234, 0.2),
+                inset 0 0 40px rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 200, 100, 0.2);
+            transform: perspective(1000px) rotateX(2deg);
+            transition: all 0.5s ease;
+        }
+
+        .hero-image-container:hover {
+            transform: perspective(1000px) rotateX(0deg);
+            box-shadow: 
+                0 0 80px rgba(255, 200, 100, 0.4),
+                0 0 120px rgba(147, 51, 234, 0.3),
+                inset 0 0 50px rgba(255, 255, 255, 0.15);
+        }
+
+        .hero-image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: brightness(1.05) contrast(1.1) saturate(1.2);
+            transition: filter 0.5s ease;
+        }
+
+        .hero-image-container:hover img {
+            filter: brightness(1.1) contrast(1.15) saturate(1.3);
+        }
+
         .hero-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 8vw, 5rem);
@@ -238,6 +273,53 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Contador Supabase - MENOR */
+        .counter-container {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            z-index: 1000;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+            font-size: 0.7rem;
+        }
+
+        .counter-container:hover {
+            opacity: 1;
+        }
+
+        .counter-badge {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 200, 100, 0.2);
+            border-radius: 15px;
+            padding: 4px 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .counter-icon {
+            color: rgba(255, 200, 100, 0.9);
+            font-size: 0.8rem;
+        }
+
+        .counter-number {
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 700;
+            font-size: 0.8rem;
+        }
+
+        .counter-text {
+            color: rgba(255, 200, 100, 0.7);
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
         }
 
         /* Tables Layout */
@@ -438,7 +520,6 @@
             line-height: 1.3;
         }
 
-        /* Para telas pequenas, ajustamos o tamanho do texto */
         @media (max-width: 480px) {
             .card-name {
                 font-size: 1.5rem;
@@ -669,20 +750,60 @@
             color: rgba(255, 200, 100, 0.6);
         }
 
-        /* Rare Badge */
+        /* Rare Badge - Estilo RARÍSSIMA */
         .rare-badge {
             position: absolute;
             top: 10px;
             right: 10px;
             background: linear-gradient(135deg, rgba(147, 51, 234, 0.9) 0%, rgba(102, 0, 204, 0.9) 100%);
             color: white;
-            padding: 5px 15px;
+            padding: 5px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
+            font-size: 0.7rem;
+            font-weight: 700;
             letter-spacing: 0.05em;
             z-index: 2;
             box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+            text-transform: uppercase;
+        }
+
+        /* Estilo especial para RARÍSSIMA */
+        .ultra-rare-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, 
+                rgba(220, 20, 60, 0.9) 0%, 
+                rgba(147, 51, 234, 0.9) 50%, 
+                rgba(30, 144, 255, 0.9) 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            z-index: 2;
+            box-shadow: 
+                0 0 25px rgba(220, 20, 60, 0.6),
+                0 0 15px rgba(147, 51, 234, 0.4),
+                0 0 5px rgba(30, 144, 255, 0.3);
+            text-transform: uppercase;
+            animation: pulse-ultra-rare 2s infinite;
+        }
+
+        @keyframes pulse-ultra-rare {
+            0%, 100% { 
+                box-shadow: 
+                    0 0 25px rgba(220, 20, 60, 0.6),
+                    0 0 15px rgba(147, 51, 234, 0.4),
+                    0 0 5px rgba(30, 144, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 35px rgba(220, 20, 60, 0.8),
+                    0 0 25px rgba(147, 51, 234, 0.6),
+                    0 0 15px rgba(30, 144, 255, 0.5);
+            }
         }
     </style>
 </head>
@@ -696,10 +817,20 @@
         <div class="stars-container" id="starsContainer"></div>
     </div>
 
+    <!-- Contador Supabase MENOR -->
+    <div class="counter-container">
+        <div class="counter-badge">
+            <span class="counter-text">ALMAS</span>
+            <span class="counter-number" id="visitCount">0</span>
+        </div>
+    </div>
+
     <div class="container">
         <section class="hero-section">
             <div class="hero-content">
-                <img src="https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/hero_pombagira.png" alt="Hero Pombagira" style="max-width: 100%; margin-bottom: 2rem; border-radius: 12px;">
+                <div class="hero-image-container">
+                    <img src="https://raw.githubusercontent.com/alexialuzdeferro/misterio-das-giras/refs/heads/main/hero_pombagira.png" alt="Hero Pombagira">
+                </div>
                 <h1 class="hero-title">Mistério das Giras</h1>
                 <h2 class="hero-subtitle">Pombagiras Conhecidas e Raras</h2>
                 <p class="hero-description">Explore o mundo místico das Pombagiras, entidades poderosas da Umbanda e Quimbanda. Conheça as Pombagiras tradicionais e descubra as entidades raras, cada uma com suas características únicas e poderes especiais.</p>
@@ -733,6 +864,11 @@
     </div>
 
     <script>
+        // Configuração Supabase
+        const SUPABASE_URL = 'https://rbygxkbewzknvjjhxdvw.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJieWd4a2Jld3prbnZqamh4ZHZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjYwMDcxNjQsImV4cCI6MjA4MTU4MzE2NH0.YrHF9HEGo6yv9MyNsPzFgBhaAB1DRh2SLU8f7L6s1nY';
+        
+        // Dados das Pombagiras
         const pombagiras = [
             {
                 "id": "maria-padilha",
@@ -848,7 +984,7 @@
                 "moonPhase": "Lua minguante",
                 "colors": ["Preto", "Vermelho", "Prata"],
                 "offerings": ["Facas ou navalhas", "Cerveja", "Cigarro", "Dinheiro"],
-                "description": "Maria Navalha é a Pombagira da malandragem, da rua e da sobrevivência. Seu nome evoca a navalha, símbolo de proteção e de justiça nas mãos daqueles que precisam se defender. Ela é invocada para questões de proteção em ambientes perigosos, para afugantar maus elementos e para dar astúcia. É uma entidade que entende a vida nas ruas e a luta diária.",
+                "description": "Maria Navalha é a Pombagira da malandragem, da rua e da sobrevivência. Seu nome evoca a navalha, símbolo de proteção e de justiça nas mãos daqueles que precisam se defender. Ela é invocada para questões de proteção em ambientes perigosos, para afugentar maus elementos e para dar astúcia. É uma entidade que entende a vida nas ruas e a luta diária.",
                 "signos": ["Escorpião", "Gêmeos"],
                 "locais": ["Ruas movimentadas", "Becos", "Encruzilhadas urbanas"],
                 "simbolismo": ["Navalha", "Chave", "Carta de baralho"],
@@ -1044,8 +1180,147 @@
                 "locais": ["Becos escuros", "Portais sombrios", "Encruzilhadas noturnas"],
                 "simbolismo": ["Sombra", "Véu", "Portal oculto", "Morcego"],
                 "utensílios": ["Véu negro", "Chave antiga", "Cajado escuro"]
+            },
+            // NOVAS POMBAGIRAS RARÍSSIMAS - COM DESTAQUE ESPECIAL
+            {
+                "id": "calunga-profunda",
+                "name": "Pombagira da Calunga Profunda",
+                "attribute": "Morte/Regeneração",
+                "attributeFormatted": "Morte<br>Regeneração",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_calunga_profunda.png",
+                "day": "Segunda-feira",
+                "moonPhase": "Lua nova",
+                "colors": ["Preto", "Branco", "Prata", "Roxo"],
+                "offerings": ["Água do mar", "Conchas negras", "Velas pretas e brancas", "Flores brancas", "Incenso de mirra"],
+                "description": "A Pombagira da Calunga Profunda é a guardiã dos portais entre a vida e a morte. Calunga, na cultura afro-brasileira, representa o mar e o cemitério - os dois grandes mistérios. Ela trabalha com a regeneração espiritual, ajudando nos processos de morte e renascimento simbólicos. É invocada para superar perdas profundas, transformar dores em sabedoria e acessar conhecimentos ancestrais. Sua energia é profunda e contemplativa, exigindo respeito absoluto.",
+                "signos": ["Escorpião", "Peixes", "Capricórnio"],
+                "locais": ["Praias desertas à noite", "Encruzilhadas de cemitérios", "Penhascos à beira-mar"],
+                "simbolismo": ["Âncora", "Concha negra", "Espelho d'água", "Portão"],
+                "utensílios": ["Âncora pequena", "Espelho negro", "Cálice de prata"],
+                "ultraRare": true
+            },
+            {
+                "id": "correntes",
+                "name": "Pombagira das Correntes",
+                "attribute": "Libertação/Vínculos",
+                "attributeFormatted": "Libertação<br>Vínculos",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_correntes.png",
+                "day": "Quarta-feira",
+                "moonPhase": "Lua crescente",
+                "colors": ["Prateado", "Branco", "Azul-celeste", "Cinza"],
+                "offerings": ["Cadeados abertos", "Chaves", "Velas prateadas", "Água corrente", "Fitas brancas"],
+                "description": "A Pombagira das Correntes é a especialista em romper vínculos negativos e libertar aqueles que estão presos em situações opressoras. Ela trabalha com a quebra de amarras energéticas, contratos kármicos e relacionamentos tóxicos. É invocada para obter liberdade emocional, financeira ou espiritual. Sua energia é cortante e precisa, como uma tesoura que corta os fios invisíveis que nos prendem. Dizem que ela carrega um feixe de chaves que abre qualquer cadeado espiritual.",
+                "signos": ["Aquário", "Gêmeos", "Libra"],
+                "locais": ["Ponte sobre rios", "Portões de ferro", "Encruzilhadas com estátuas"],
+                "simbolismo": ["Corrente quebrada", "Chave", "Tesoura", "Asas"],
+                "utensílios": ["Feixe de chaves", "Tesoura de prata", "Corrente partida"],
+                "ultraRare": true
+            },
+            {
+                "id": "neblina",
+                "name": "Pombagira da Neblina",
+                "attribute": "Ilusão/Verdade",
+                "attributeFormatted": "Ilusão<br>Verdade",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_neblina.png",
+                "day": "Sexta-feira",
+                "moonPhase": "Lua cheia",
+                "colors": ["Cinza-perolado", "Branco-fumê", "Azul-claro", "Prata"],
+                "offerings": ["Névoa de incenso", "Velas branco-fumê", "Água com essência", "Cristais de quartzo", "Espelhos pequenos"],
+                "description": "A Pombagira da Neblina é a senhora das aparências e das verdades ocultas. Ela trabalha com o véu da ilusão, podendo tanto esconder quanto revelar. É invocada para proteção através do ocultamento, para desvendar mentiras ou para trabalhos que requerem discrição absoluta. Sua energia é etérea e mutável, como a névoa que se dissipa ao amanhecer. Ela ensina que nem tudo o que é visível é real, e nem tudo o que é real é visível.",
+                "signos": ["Peixes", "Câncer", "Escorpião"],
+                "locais": ["Florestas com neblina", "Montanhas ao amanhecer", "Lagos enevoados", "Ruínas"],
+                "simbolismo": ["Véu", "Espelho embaçado", "Névoa", "Farol"],
+                "utensílios": ["Véu cinza", "Lanterna de névoa", "Espelho circular"],
+                "ultraRare": true
+            },
+            {
+                "id": "fenda",
+                "name": "Pombagira da Fenda",
+                "attribute": "Transição/Limiar",
+                "attributeFormatted": "Transição<br>Limiar",
+                "image": "https://raw.githubusercontent.com/alexialuzdeferro/giras/refs/heads/main/pombagira_fenda.png",
+                "day": "Sábado",
+                "moonPhase": "Lua minguante",
+                "colors": ["Roxo-escuro", "Preto", "Dourado", "Vermelho-sangue"],
+                "offerings": ["Pedras pontiagudas", "Velas roxas", "Vinho tinto", "Espadas pequenas", "Chaves antigas"],
+                "description": "A Pombagira da Fenda é a guardiã dos espaços entre os mundos. Ela habita as fendas da realidade, os momentos de transição e os limiares entre estados de consciência. É invocada para acessar realidades paralelas, para trabalhos de viagem astral ou para atravessar períodos de crise profunda. Sua energia é intensa e um tanto perturbadora, pois ela vive nas bordas do conhecido. Dizem que seu nome vem das fendas nas rochas onde se acreditava que os mundos se tocavam.",
+                "signos": ["Escorpião", "Aquário", "Capricórnio"],
+                "locais": ["Rachaduras em rochas", "Portais antigos", "Encruzilhadas em abismos", "Túneis"],
+                "simbolismo": ["Fenda", "Portal", "Ponte estreita", "Abismo"],
+                "utensílios": ["Pedra fissurada", "Chave serrilhada", "Ponte em miniatura"],
+                "ultraRare": true
             }
         ];
+
+        // Função para registrar visitas no Supabase
+        async function trackVisit() {
+            try {
+                // Criar um ID único para esta sessão
+                const sessionId = localStorage.getItem('session_id') || 
+                    'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+                
+                if (!localStorage.getItem('session_id')) {
+                    localStorage.setItem('session_id', sessionId);
+                    
+                    // Registrar visita no Supabase
+                    const response = await fetch(`${SUPABASE_URL}/rest/v1/visits`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': `Bearer ${SUPABASE_KEY}`
+                        },
+                        body: JSON.stringify({
+                            session_id: sessionId,
+                            visited_at: new Date().toISOString(),
+                            user_agent: navigator.userAgent
+                        })
+                    });
+                    
+                    if (response.ok) {
+                        updateVisitCount();
+                    }
+                } else {
+                    updateVisitCount();
+                }
+            } catch (error) {
+                console.log('Erro ao registrar visita:', error);
+            }
+        }
+
+        // Função para obter e atualizar contador de visitas
+        async function updateVisitCount() {
+            try {
+                const response = await fetch(`${SUPABASE_URL}/rest/v1/visits?select=id`, {
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': `Bearer ${SUPABASE_KEY}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const visits = await response.json();
+                    const count = visits.length;
+                    
+                    // Formatar número com separador de milhar
+                    const formattedCount = count.toLocaleString('pt-BR');
+                    
+                    // Atualizar display
+                    const counterElement = document.getElementById('visitCount');
+                    if (counterElement) {
+                        counterElement.textContent = formattedCount;
+                        
+                        // Animação sutil
+                        counterElement.style.transform = 'scale(1.2)';
+                        setTimeout(() => {
+                            counterElement.style.transform = 'scale(1)';
+                        }, 300);
+                    }
+                }
+            } catch (error) {
+                console.log('Erro ao obter contagem:', error);
+            }
+        }
 
         function createStars() {
             const starsContainer = document.getElementById('starsContainer');
@@ -1075,11 +1350,15 @@
             // Usamos attributeFormatted se existir, senão usamos o attribute normal
             const attributeText = pombagira.attributeFormatted || pombagira.attribute;
             
+            // Determinar qual badge usar: RARÍSSIMA para as 4 especiais, RARA para as outras
+            const badgeClass = pombagira.ultraRare ? 'ultra-rare-badge' : 'rare-badge';
+            const badgeText = pombagira.ultraRare ? 'RARÍSSIMA' : 'RARA';
+            
             let frontHTML = `
                 <div class="card-border-outer">
                     <div class="card-border-inner">
                         <div class="card-content">
-                            ${isRare ? '<div class="rare-badge">RARA</div>' : ''}
+                            ${isRare ? `<div class="${badgeClass}">${badgeText}</div>` : ''}
                             <div class="card-top-ornament">
                                 <span class="ornament-diamond">◆</span>
                             </div>
@@ -1168,7 +1447,7 @@
                         <div class="detail-content">
                             <div class="detail-image">
                                 <img src="${pombagira.image}" alt="${pombagira.name}">
-                                ${isRare ? '<div class="rare-badge" style="position: absolute; top: 20px; right: 20px;">ENTIDADE RARA</div>' : ''}
+                                ${isRare ? `<div class="${pombagira.ultraRare ? 'ultra-rare-badge' : 'rare-badge'}" style="position: absolute; top: 20px; right: 20px;">${pombagira.ultraRare ? 'ENTIDADE RARÍSSIMA' : 'ENTIDADE RARA'}</div>` : ''}
                             </div>
                             <div class="detail-info">
                                 <h2 class="detail-name">${pombagira.name}</h2>
@@ -1233,6 +1512,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
             renderCards();
+            trackVisit(); // Iniciar rastreamento de visitas
         });
     </script>
 </body>
